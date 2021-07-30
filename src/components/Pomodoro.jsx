@@ -1,30 +1,31 @@
 import React, { useEffect, useState } from "react";
 
 const Pomodoro = () => {
-  const [restTime, setRestTime] = useState(0);
+  const [min, setMin] = useState(0);
+  const [sec, setSec] = useState("00");
 
-  // watch restTime
+  // watch min
   useEffect(() => {
-    if (restTime === 0) {
+    if (min === 0) {
       clearAllInterval();
     }
-  }, [restTime]);
+  }, [min]);
 
   // counter control
   const increaseTimeHandler = () => {
-    setRestTime((prev) => {
+    setMin((prev) => {
       return prev + 1;
     });
   };
 
   const decreaseTimeHandler = () => {
-    setRestTime((prev) => {
+    setMin((prev) => {
       return prev - 1;
     });
   };
 
   const resetTimeHandler = () => {
-    setRestTime(0);
+    setMin(0);
   };
 
   // timer control
@@ -47,7 +48,9 @@ const Pomodoro = () => {
   return (
     <>
       <h4>Pomodoro</h4>
-      <h5>{restTime}</h5>
+      <h5>
+        {min}:{sec}
+      </h5>
       <button onClick={decreaseTimeHandler}>-</button>
       <button onClick={resetTimeHandler}>0</button>
       <button onClick={increaseTimeHandler}>+</button>
