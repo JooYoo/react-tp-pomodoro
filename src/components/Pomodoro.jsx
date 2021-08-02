@@ -6,10 +6,12 @@ const Pomodoro = () => {
 
   // watch min
   useEffect(() => {
-    if (min === 0) {
+    if (sec === 0) {
       clearAllInterval();
+
+      // TODO: decrease Min
     }
-  }, [min]);
+  }, [sec]);
 
   // counter control
   const increaseTimeHandler = () => {
@@ -36,8 +38,21 @@ const Pomodoro = () => {
   };
 
   const startHandler = () => {
+    // decrase Sec
+    countDownSec();
+  };
+
+  const countDownSec = () => {
+    // spend 1s: "00" -> 59
+    setTimeout(() => {
+      setSec(60);
+    }, 1000);
+
+    // decrease each sec
     setInterval(() => {
-      decreaseTimeHandler();
+      setSec((prev) => {
+        return prev - 1;
+      });
     }, 1000);
   };
 
