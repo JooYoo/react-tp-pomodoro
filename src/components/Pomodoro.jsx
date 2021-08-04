@@ -8,16 +8,18 @@ const Pomodoro = () => {
 
   // watch min
   useEffect(() => {
-    // count down finished
-    if (min === 0) {
+    // time over
+    if (min === -1 && sec === 59) {
+      // stop and rest timer
       stopHandler();
 
-      // TODO: alarm CountDown finish
+      // alarm CountDown finish
+      alert("Time is over");
     }
 
     // the sec which updates the Min
     // TODO: sec === 0
-    if (sec === 55) {
+    if (sec === 0) {
       // 59 ~ 0 repeat
       clearAllInterval();
       countDownSec();
@@ -61,16 +63,19 @@ const Pomodoro = () => {
 
     // decrase Sec
     countDownSec();
+
+    // decrease Min as init
+    decreaseMinHandler();
   };
 
   const countDownSec = () => {
-    // set init Min
+    // set init Min: "00"
     setSec(initSec);
 
     // spend 1s: "00" -> 59
-    setTimeout(() => {
-      setSec(60);
-    }, 1000);
+    // setTimeout(() => {
+    // }, 1000);
+    setSec(59);
 
     // decrease each sec
     setInterval(() => {
