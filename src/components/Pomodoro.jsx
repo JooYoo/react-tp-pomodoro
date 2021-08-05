@@ -11,7 +11,7 @@ const Pomodoro = () => {
     // time over
     if (min === -1 && sec === 59) {
       // stop and rest timer
-      stopHandler();
+      stopTimer();
 
       // alarm CountDown finish
       alert("Time is over");
@@ -25,24 +25,24 @@ const Pomodoro = () => {
       countDownSec();
 
       // decrease Min
-      decreaseMinHandler();
+      decreaseMin();
     }
   }, [min, sec]);
 
   // counter control
-  const increaseMinHandler = () => {
+  const increaseMin = () => {
     setMin((prev) => {
       return prev + 1;
     });
   };
 
-  const decreaseMinHandler = () => {
+  const decreaseMin = () => {
     setMin((prev) => {
       return prev - 1;
     });
   };
 
-  const resetMinHandler = () => {
+  const resetMin = () => {
     setMin(initMin);
   };
 
@@ -58,23 +58,21 @@ const Pomodoro = () => {
     }
   };
 
-  const startHandler = () => {
+  const startTimer = () => {
     // TODO: condition for disable start button
 
     // decrase Sec
     countDownSec();
 
     // decrease Min as init
-    decreaseMinHandler();
+    decreaseMin();
   };
 
   const countDownSec = () => {
     // set init Min: "00"
     setSec(initSec);
 
-    // spend 1s: "00" -> 59
-    // setTimeout(() => {
-    // }, 1000);
+    // init 1st sec: "00" -> 59
     setSec(59);
 
     // decrease each sec
@@ -85,7 +83,7 @@ const Pomodoro = () => {
     }, 1000);
   };
 
-  const stopHandler = () => {
+  const stopTimer = () => {
     // clear Interval
     clearAllInterval();
 
@@ -100,12 +98,12 @@ const Pomodoro = () => {
       <h5>
         {min}:{sec}
       </h5>
-      <button onClick={decreaseMinHandler}>-</button>
-      <button onClick={resetMinHandler}>0</button>
-      <button onClick={increaseMinHandler}>+</button>
+      <button onClick={decreaseMin}>-</button>
+      <button onClick={resetMin}>0</button>
+      <button onClick={increaseMin}>+</button>
       <hr />
-      <button onClick={startHandler}>Start</button>
-      <button onClick={stopHandler}>Stop</button>
+      <button onClick={startTimer}>Start</button>
+      <button onClick={stopTimer}>Stop</button>
     </>
   );
 };
