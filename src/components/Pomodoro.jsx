@@ -5,6 +5,7 @@ const Pomodoro = () => {
   const initSec = "00";
   const [min, setMin] = useState(initMin);
   const [sec, setSec] = useState(initSec);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   // watch min
   useEffect(() => {
@@ -18,7 +19,6 @@ const Pomodoro = () => {
     }
 
     // the sec which updates the Min
-    // TODO: sec === 0
     if (sec === 0) {
       // 59 ~ 0 repeat
       clearAllInterval();
@@ -27,6 +27,9 @@ const Pomodoro = () => {
       // decrease Min
       decreaseMin();
     }
+
+    // check btn disabled
+    setIsDisabled(min === 0 && sec === "00");
   }, [min, sec]);
 
   // counter control
@@ -102,7 +105,9 @@ const Pomodoro = () => {
       <button onClick={resetMin}>0</button>
       <button onClick={increaseMin}>+</button>
       <hr />
-      <button onClick={startTimer}>Start</button>
+      <button onClick={startTimer} disabled={isDisabled}>
+        Start
+      </button>
       <button onClick={stopTimer}>Stop</button>
     </>
   );
