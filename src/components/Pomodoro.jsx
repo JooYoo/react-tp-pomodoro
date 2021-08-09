@@ -7,7 +7,7 @@ const Pomodoro = () => {
   const [sec, setSec] = useState(initSec);
   const [isDisabled, setIsDisabled] = useState(true);
 
-  // watch min
+  // watch Min and Sec
   useEffect(() => {
     // time over
     if (min === -1 && sec === 59) {
@@ -62,8 +62,6 @@ const Pomodoro = () => {
   };
 
   const startTimer = () => {
-    // TODO: condition for disable start button
-
     // decrase Sec
     countDownSec();
 
